@@ -1,0 +1,72 @@
+{
+  "ipv4-addr": {
+    "fields": {
+      "value": ["networkConnections.sourceAddress", "networkConnections.destinationAddress"]
+    }
+  },
+  "ipv6-addr": {
+    "fields": {
+      "value": ["networkConnections.sourceAddress", "networkConnections.destinationAddress"]
+    }
+  },
+  "network-traffic": {
+    "fields": {
+      "src_port": ["networkConnections.sourcePort"],
+      "dst_port": ["networkConnections.destinationPort"],
+      "protocols[*]": ["networkConnections.protocol"],
+      "src_ref.value": ["networkConnections.sourceAddress"],
+      "dst_ref.value": ["networkConnections.destinationAddress"]
+    }
+  },
+  "directory": {
+    "fields": {
+      "path": ["fileStates.path", "processes.path"]
+    }
+  },
+  "file": {
+    "fields": {
+      "parent_directory_ref.path": ["fileStates.path"],
+      "name": ["fileStates.name"],
+      "hashes.SHA-256": ["fileStates.fileHash.hashType", "fileStates.fileHash.hashValue"],
+      "hashes.SHA-1": ["fileStates.fileHash.hashType", "fileStates.fileHash.hashValue"]
+    }
+  },
+   "process" : {
+    "fields": {
+      "name": ["processes.name"],
+      "parent_ref.name": ["processes.parentProcessName"],
+      "command_line": ["processes.commandLine"],
+      "pid": ["processes.processId"],
+      "parent_ref.pid": ["processes.parentProcessId"],
+      "binary_ref.path": ["processes.path"],
+      "binary_ref.hashes.SHA-256": ["processes.fileHash.hashType", "processes.fileHash.hashValue"],
+      "binary_ref.hashes.SHA-1": ["processes.fileHash.hashType", "processes.fileHash.hashValue"]
+    }
+  },
+  "domain": {
+    "fields": {
+      "value": ["hostStates.fqdn", "networkConnections.destinationDomain"]
+    }
+  },
+  "user-account": {
+    "fields": {
+      "user_id": ["userStates.aadUserId"],
+      "account_login": ["userStates.accountName"],
+      "account_last_login": ["userStates.logonDateTime"]
+    }
+  },
+  "x_com_msazure_sentinel_alert": {
+    "fields":{
+      "azureTenantId": ["azureTenantId"],
+      "azureSubscriptionId": ["azureSubscriptionId"],
+      "id": ["id"],
+      "category": ["category"],
+      "severity": ["severity"],
+      "title": ["title"],
+      "vendorInformation.provider": ["vendorInformation.provider"],
+      "vendorInformation.vendor": ["vendorInformation.vendor"],
+      "hostStates.netBiosName": ["hostStates.netBiosName"],
+      "malwareStates.name": ["malwareStates.name"]
+    }
+  }
+}
