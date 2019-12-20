@@ -105,16 +105,29 @@ class TestAzureSentinalConnection(unittest.TestCase):
                             "name": "services.exe",
                             "path": "c:\\\\windows\\\\system32\\\\services.exe",
                             "riskScore": null,
-                            "fileHash": null
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "00a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d2d644169d"
+                             }
                         },
                         {
                             "name": "svchost.exe",
                             "path": "c:\\\\windows\\\\system32\\\\svchost.exe",
                             "riskScore": null,
-                            "fileHash": null
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "33a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d644169d"
+                             }
                         }
                     ],
-                    "processes": []
+                    "processes": [
+                        {
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "33a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d644169d"
+                            }
+                        }
+                    ]
                 }
             ]
         }"""
@@ -152,16 +165,29 @@ class TestAzureSentinalConnection(unittest.TestCase):
                             "name": "services.exe",
                             "path": "c:\\\\windows\\\\system32\\\\services.exe",
                             "riskScore": null,
-                            "fileHash": null
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "00a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d2d644169d"
+                             }
                         },
                         {
                             "name": "svchost.exe",
                             "path": "c:\\\\windows\\\\system32\\\\svchost.exe",
                             "riskScore": null,
-                            "fileHash": null
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "33a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d644169d"
+                             }
                         }
                     ],
-                    "processes": []
+                    "processes": [
+                        {
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "33a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d644169d"
+                            }
+                        }
+                    ]
                 }
             ]
         }"""
@@ -174,19 +200,32 @@ class TestAzureSentinalConnection(unittest.TestCase):
                 {
                     "fileStates": [
                         {
-                            "name": "services.exe",
+                            "name": "cmd.exe",
                             "path": "c:\\\\windows\\\\system32\\\\services.exe",
                             "riskScore": null,
-                            "fileHash": null
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "88a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d2d644169d"
+                             }
                         },
                         {
-                            "name": "svchost.exe",
+                            "name": "notepad.exe",
                             "path": "c:\\\\windows\\\\system32\\\\svchost.exe",
                             "riskScore": null,
-                            "fileHash": null
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "77a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d644169d"
+                             }
                         }
                     ],
-                    "processes": []
+                    "processes": [
+                        {
+                            "fileHash": {
+                               "hashType": "sha256",
+                               "hashValue": "33a1cf85c6ab96df38a4023f0cee4df60f62280768fc9c06a235e6d644169d"
+                            }
+                        }
+                    ]
                 }
             ]
         }"""
