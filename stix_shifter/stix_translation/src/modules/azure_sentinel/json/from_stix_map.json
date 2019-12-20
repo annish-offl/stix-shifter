@@ -43,9 +43,9 @@
       "binary_ref.hashes.SHA-1": ["processes.fileHash.hashType", "processes.fileHash.hashValue"]
     }
   },
-  "domain": {
+  "domain-name": {
     "fields": {
-      "value": ["hostStates.fqdn", "networkConnections.destinationDomain"]
+      "value": ["hostStates.fqdn", "hostStates.netBiosName"]
     }
   },
   "user-account": {
@@ -55,18 +55,18 @@
       "account_last_login": ["userStates.logonDateTime"]
     }
   },
-  "x_com_msazure_sentinel_alert": {
-    "fields":{
+  "x_com_msazure_sentinel": {
+    "fields": {
       "azureTenantId": ["azureTenantId"],
-      "azureSubscriptionId": ["azureSubscriptionId"],
+      "azureSubscriptionId": ["azureSubscriptionId"]
+    }
+  },
+  "x_com_msazure_sentinel_alert": {
+    "fields": {
       "id": ["id"],
-      "category": ["category"],
-      "severity": ["severity"],
       "title": ["title"],
       "vendorInformation.provider": ["vendorInformation.provider"],
-      "vendorInformation.vendor": ["vendorInformation.vendor"],
-      "hostStates.netBiosName": ["hostStates.netBiosName"],
-      "malwareStates.name": ["malwareStates.name"]
+      "vendorInformation.vendor": ["vendorInformation.vendor"]
     }
   }
 }

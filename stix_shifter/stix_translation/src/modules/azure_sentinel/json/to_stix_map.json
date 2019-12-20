@@ -15,23 +15,15 @@
     "transformer": "ToInteger"
   },
   "azureTenantId": {
-    "key": "x_com_msazure_sentinel_alert.Azure_TenantId",
+    "key": "x_com_msazure_sentinel.Azure_TenantId",
     "cybox": false
   },
   "azureSubscriptionId": {
-    "key": "x_com_msazure_sentinel_alert.Azure_SubscriptionId",
+    "key": "x_com_msazure_sentinel.Azure_SubscriptionId",
     "cybox": false
   },
   "id": {
     "key": "x_com_msazure_sentinel_alert.Sentinel_AlertId",
-    "cybox": false
-  },
-  "category": {
-    "key": "x_com_msazure_sentinel_alert.Category",
-    "cybox": false
-  },
-  "severity": {
-    "key": "x_com_msazure_sentinel_alert.Severity",
     "cybox": false
   },
   "title": {
@@ -46,69 +38,38 @@
     "key": "x_com_msazure_sentinel_alert.Vendor",
     "cybox": false
   },
-  "hostStates_0_netBiosName": {
-    "key": "x_com_msazure_sentinel_alert.netBiosName",
-    "cybox": false
-  },
-  "hostStates_1_netBiosName": {
-    "key": "x_com_msazure_sentinel_alert.netBiosName",
-    "cybox": false
-  },
-  "hostStates_2_netBiosName": {
-    "key": "x_com_msazure_sentinel_alert.netBiosName",
-    "cybox": false
-  },
-  "hostStates_3_netBiosName": {
-    "key": "x_com_msazure_sentinel_alert.netBiosName",
-    "cybox": false
-  },
-  "malwareStates_0_name": {
-    "key": "x_com_msazure_sentinel_alert.malwareName",
-    "cybox": false
-  },
-  "malwareStates_1_name": {
-    "key": "x_com_msazure_sentinel_alert.malwareName",
-    "cybox": false
-  },
-  "malwareStates_2_name": {
-    "key": "x_com_msazure_sentinel_alert.malwareName",
-    "cybox": false
-  },
-  "malwareStates_3_name": {
-    "key": "x_com_msazure_sentinel_alert.malwareName",
-    "cybox": false
-  },
   "hostStates_0_fqdn": {
-      "key": "domain.value",
+      "key": "domain-name.value",
       "object": "fqdn_0"
   },
   "hostStates_1_fqdn": {
-      "key": "domain.value",
+      "key": "domain-name.value",
       "object": "fqdn_1"
   },
   "hostStates_2_fqdn": {
-      "key": "domain.value",
+      "key": "domain-name.value",
       "object": "fqdn_2"
   },
   "hostStates_3_fqdn": {
-      "key": "domain.value",
+      "key": "domain-name.value",
+      "transformer": "ToDomainName",
       "object": "fqdn_3"
   },
-  "networkConnections_0_destinationDomain": {
-      "key": "domain.value",
-      "object": "dst_domain_0"
+  "hostStates_0_netBiosName": {
+      "key": "domain-name.value",
+      "object": "net_bios_name_0"
   },
-  "networkConnections_1_destinationDomain": {
-      "key": "domain.value",
-      "object": "dst_domain_1"
+  "hostStates_1_netBiosName": {
+      "key": "domain-name.value",
+      "object": "net_bios_name_1"
   },
-  "networkConnections_2_destinationDomain": {
-      "key": "domain.value",
-      "object": "dst_domain_2"
+  "hostStates_2_netBiosName": {
+      "key": "domain-name.value",
+      "object": "net_bios_name_2"
   },
-  "networkConnections_3_destinationDomain": {
-      "key": "domain.value",
-      "object": "dst_domain_3"
+  "hostStates_3_netBiosName": {
+      "key": "domain-name.value",
+      "object": "net_bios_name_3"
   },
   "networkConnections_0_sourceAddress": [
     {
@@ -263,94 +224,38 @@
     "key": "file.name",
     "object": "file3"
   },
-  "fileStates_0_sha1": [
-      {
-          "key": "file.hashes.SHA-1",
-          "object": "file0"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process0",
-          "references": "file0"
-      }
-  ],
-  "fileStates_1_sha1": [
-      {
-          "key": "file.hashes.SHA-1",
-          "object": "file1"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process1",
-          "references": "file1"
-      }
-  ],
-  "fileStates_2_sha1": [
-      {
-          "key": "file.hashes.SHA-1",
-          "object": "file2"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process2",
-          "references": "file2"
-      }
-  ],
-  "fileStates_3_sha1": [
-      {
-          "key": "file.hashes.SHA-1",
-          "object": "file3"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process3",
-          "references": "file3"
-      }
-  ],
-  "fileStates_0_sha256": [
-      {
-          "key": "file.hashes.SHA-256",
-          "object": "file0"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process0",
-          "references": "file0"
-      }
-  ],
-  "fileStates_1_sha256": [
-      {
-          "key": "file.hashes.SHA-256",
-          "object": "file1"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process1",
-          "references": "file1"
-      }
-  ],
-  "fileStates_2_sha256": [
-      {
-          "key": "file.hashes.SHA-256",
-          "object": "file2"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process2",
-          "references": "file2"
-      }
-  ],
-  "fileStates_3_sha256": [
-      {
-          "key": "file.hashes.SHA-256",
-          "object": "file3"
-      },
-      {
-          "key": "process.binary_ref",
-          "object": "process3",
-          "references": "file3"
-      }
-  ],
+  "fileStates_0_sha1": {
+    "key": "file.hashes.SHA-1",
+    "object": "file0"
+  },
+  "fileStates_1_sha1": {
+    "key": "file.hashes.SHA-1",
+    "object": "file1"
+  },
+  "fileStates_2_sha1": {
+    "key": "file.hashes.SHA-1",
+    "object": "file2"
+  },
+  "fileStates_3_sha1": {
+    "key": "file.hashes.SHA-1",
+    "object": "file3"
+  },
+  "fileStates_0_sha256": {
+    "key": "file.hashes.SHA-256",
+    "object": "file0"
+  },
+  "fileStates_1_sha256": {
+    "key": "file.hashes.SHA-256",
+    "object": "file1"
+  },
+  "fileStates_2_sha256": {
+    "key": "file.hashes.SHA-256",
+    "object": "file2"
+  },
+  "fileStates_3_sha256": {
+    "key": "file.hashes.SHA-256",
+    "object": "file3"
+  },
   "processes_0_name": {
     "key": "process.name",
     "object": "process0"
@@ -366,6 +271,46 @@
   "processes_3_name": {
     "key": "process.name",
     "object": "process3"
+  },
+  "processes_0_sha1": {
+    "key": "process.binary_ref",
+    "object": "process0",
+    "references": "file0"
+  },
+  "processes_1_sha1": {
+    "key": "process.binary_ref",
+    "object": "process1",
+    "references": "file1"
+  },
+  "processes_2_sha1": {
+    "key": "process.binary_ref",
+    "object": "process2",
+    "references": "file2"
+  },
+  "processes_3_sha1": {
+    "key": "process.binary_ref",
+    "object": "process3",
+    "references": "file3"
+  },
+  "processes_0_sha256": {
+    "key": "process.binary_ref",
+    "object": "process0",
+    "references": "file0"
+  },
+  "processes_1_sha256": {
+    "key": "process.binary_ref",
+    "object": "process1",
+    "references": "file1"
+  },
+  "processes_2_sha256": {
+    "key": "process.binary_ref",
+    "object": "process2",
+    "references": "file2"
+  },
+  "processes_3_sha256": {
+    "key": "process.binary_ref",
+    "object": "process3",
+    "references": "file3"
   },
   "processes_0_path": [
       {
