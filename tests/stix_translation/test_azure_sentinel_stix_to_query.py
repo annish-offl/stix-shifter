@@ -118,14 +118,13 @@ class TestStixToQuery(unittest.TestCase):
         self._test_query_assertions(query, queries)
 
     def test_custom_in_comp_exp(self):
-        stix_pattern = "[x_com_msazure_sentinel_alert:category NOT IN ('SuspiciousSVCHOSTRareGroup','CriticalAlerts')" \
+        stix_pattern = "[x_com_msazure_sentinel:azureTenantId NOT IN ('Sb73e5ba','b73e5ba8')" \
                        "AND x_com_msazure_sentinel_alert:title LIKE 'Suspicious']"
         query = translation.translate('azure_sentinel', 'query', '{}', stix_pattern)
         query['queries'] = _remove_timestamp_from_query(query['queries'])
 
-        queries = ["(contains(title, 'Suspicious') and category ne 'SuspiciousSVCHOSTRareGroup' and category ne "
-                   "'CriticalAlerts') and (eventDateTime ge 2019-12-12T09:25:35.173Z and eventDateTime le "
-                   "2019-12-12T09:30:35.173Z)"]
+        queries = ["(contains(title, 'Suspicious') and azureTenantId ne 'Sb73e5ba' and azureTenantId ne 'b73e5ba8') "
+                   "and (eventDateTime ge 2019-12-20T09:21:02.675Z and eventDateTime le 2019-12-20T09:26:02.675Z)"]
         queries = _remove_timestamp_from_query(queries)
         self._test_query_assertions(query, queries)
 
