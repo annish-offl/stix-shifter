@@ -78,9 +78,8 @@ class TestStixToQuery(unittest.TestCase):
         query = translation.translate('azure_sentinel', 'query', '{}', stix_pattern)
         query['queries'] = _remove_timestamp_from_query(query['queries'])
 
-        queries = ["((fileStates/any(query1:contains(query1/path, 'windows')) or processes/any("
-                   "query1:contains(query1/path, 'windows')))) and (eventDateTime ge "
-                   "2019-12-09T07:01:33.129Z and eventDateTime le 2019-12-09T07:06:33.129Z)"]
+        queries = ["(fileStates/any(query1:contains(query1/path, 'windows'))) and (eventDateTime ge "
+                   "2019-12-23T05:25:13.419Z and eventDateTime le 2019-12-23T05:30:13.419Z)"]
 
         queries = _remove_timestamp_from_query(queries)
         self._test_query_assertions(query, queries)
@@ -118,7 +117,7 @@ class TestStixToQuery(unittest.TestCase):
         self._test_query_assertions(query, queries)
 
     def test_custom_in_comp_exp(self):
-        stix_pattern = "[x_com_msazure_sentinel:azureTenantId NOT IN ('Sb73e5ba','b73e5ba8')" \
+        stix_pattern = "[x_com_msazure_sentinel:tenant_id NOT IN ('Sb73e5ba','b73e5ba8')" \
                        "AND x_com_msazure_sentinel_alert:title LIKE 'Suspicious']"
         query = translation.translate('azure_sentinel', 'query', '{}', stix_pattern)
         query['queries'] = _remove_timestamp_from_query(query['queries'])
@@ -197,8 +196,8 @@ class TestStixToQuery(unittest.TestCase):
     def test_comb_observation_obs_qualifier_two(self):
         stix_pattern = "([file:hashes.'SHA-1' LIKE 'daf67'] OR [file:hashes.'SHA-1' = " \
                        "'b6d237154f2e528f0b503b58b025862d66b02b73'] OR [" \
-                       "x_com_msazure_sentinel_alert:vendorInformation.vendor = 'Microsoft'] AND [" \
-                       "x_com_msazure_sentinel_alert:vendorInformation.provider LIKE 'Microsoft']) START " \
+                       "x_com_msazure_sentinel_alert:vendor = 'Microsoft'] AND [" \
+                       "x_com_msazure_sentinel_alert:provider LIKE 'Microsoft']) START " \
                        "t'2019-09-10T08:43:10.003Z' STOP t'2019-09-23T10:43:10.453Z'"
         query = translation.translate('azure_sentinel', 'query', '{}', stix_pattern)
         query['queries'] = _remove_timestamp_from_query(query['queries'])

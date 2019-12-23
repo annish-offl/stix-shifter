@@ -143,15 +143,15 @@ class TestAzureSentinelResultsToStix(unittest.TestCase):
         custom_object_1 = observed_data['x_com_msazure_sentinel']
         custom_object_2 = observed_data['x_com_msazure_sentinel_alert']
 
-        assert custom_object_1.keys() == {'Azure_TenantId', 'Azure_SubscriptionId'}
-        assert custom_object_2.keys() == {'Sentinel_AlertId', 'Alert_Title', 'Provider', 'Vendor'}
+        assert custom_object_1.keys() == {'tenant_id', 'subscription_id'}
+        assert custom_object_2.keys() == {'id','title', 'provider', 'vendor'}
 
-        assert custom_object_1['Azure_TenantId'] == 'b73e5ba8-34d5-495a-9901-06bdb84cf13e'
-        assert custom_object_1['Azure_SubscriptionId'] == '083de1fb-cd2d-4b7c-895a-2b5af1d091e8'
-        assert custom_object_2['Sentinel_AlertId'] == '2518268485253060642_52b1a353-2fd8-4c45-8f8a-94db98dca29d'
-        assert custom_object_2['Alert_Title'] == 'Rare SVCHOST service group executed'
-        assert custom_object_2['Provider'] == 'ASC'
-        assert custom_object_2['Vendor'] == 'Microsoft'
+        assert custom_object_1['tenant_id'] == 'b73e5ba8-34d5-495a-9901-06bdb84cf13e'
+        assert custom_object_1['subscription_id'] == '083de1fb-cd2d-4b7c-895a-2b5af1d091e8'
+        assert custom_object_2['id'] == '2518268485253060642_52b1a353-2fd8-4c45-8f8a-94db98dca29d'
+        assert custom_object_2['title'] == 'Rare SVCHOST service group executed'
+        assert custom_object_2['provider'] == 'ASC'
+        assert custom_object_2['vendor'] == 'Microsoft'
 
     @staticmethod
     def test_file_process_json_to_stix():
