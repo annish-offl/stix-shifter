@@ -471,10 +471,52 @@
           "references": "directory3"
       }
   ],
-  "userStates_0_accountName": [
-    {
+  "userStates_0_aadUserId": {
           "key": "user-account.user_id",
-          "object": "ua-1"
-    }
-  ]
+          "object": "ua_uid0"
+  },
+  "userStates_1_aadUserId": {
+          "key": "user-account.user_id",
+          "object": "ua_uid1"
+  },
+  "userStates_2_aadUserId": {
+          "key": "user-account.user_id",
+          "object": "ua_uid2"
+  },
+  "userStates_3_aadUserId": {
+          "key": "user-account.user_id",
+          "object": "ua_uid3"
+  },
+  "userStates_0_accountName": {
+          "key": "user-account.account_login",
+          "object": "ua_an0"
+  },
+  "userStates_1_accountName": {
+          "key": "user-account.account_login",
+          "object": "ua_an1"
+  },
+  "userStates_2_accountName": {
+          "key": "user-account.account_login",
+          "object": "ua_an2"
+  },
+  "userStates_3_accountName": {
+          "key": "user-account.account_login",
+          "object": "ua_an3"
+  },
+  "userStates_0_logonDateTime": {
+          "key": "user-account.account_last_login",
+          "object": "ua_ldt0"
+  },
+  "userStates_1_logonDateTime": {
+          "key": "user-account.account_last_login",
+          "object": "ua_ldt1"
+  },
+  "userStates_2_logonDateTime": {
+          "key": "user-account.account_last_login",
+          "object": "ua_ldt2"
+  },
+  "userStates_3_logonDateTime": {
+          "key": "user-account.account_last_login",
+          "object": "ua_ldt3"
+  }
 }
