@@ -52,7 +52,6 @@
   },
   "hostStates_3_fqdn": {
       "key": "domain-name.value",
-      "transformer": "ToDomainName",
       "object": "fqdn_3"
   },
   "hostStates_0_netBiosName": {

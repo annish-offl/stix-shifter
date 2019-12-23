@@ -9,6 +9,7 @@ START_STOP_PATTERN = r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z)"
 
 LOGGER = logging.getLogger(__name__)
 
+
 class OperatorNotSupported(Exception):
     pass
 
@@ -159,12 +160,16 @@ class QueryStringPatternTranslator:
                             object='/'.join(obj_array), comparator=comparator, value=value)
                     # check to form hashes.'SHA-1' or hashes.'SHA-256' or binary_ref.hashes.'SHA-1' or \
                     # binary_ref.hashes.'SHA-256' related query
-                    elif mapped_field in ['fileStates.fileHash.hashType', 'processes.fileHash.hashType']:
-                        hash_type = stix_field.split('.')[1] if mapped_field == 'fileStates.fileHash.hashType' else \
-                                    stix_field.split('.')[2]
-                        comparison_string += "{object0}/any({fn}:{fn}/{object1} {comparator} '{value}')".format(
-                            object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]), comparator='eq',
+                    elif mapped_field in ['fileStates.fileHash.hashValue', 'processes.fileHash.hashValue']:
+                        hash_string = 'fileHash/hashType'
+                        hash_type = stix_field.split('.')[1] if mapped_field == 'fileStates.fileHash.hashValue' else \
+                            stix_field.split('.')[2]
+                        comparison_string += "({object0}/any({fn}:{fn}/{object1} {comparator} '{value}')".format(
+                            object0=obj_array[0], fn=lambda_func, object1=hash_string, comparator='eq',
                             value=hash_type.lower().replace('-', ''))
+                        comparison_string += " and {object0}/any({fn}:{comparator}({fn}/{object1}, {value})))".format(
+                            object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
+                            comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - contains
                     else:
                         comparison_string += "{object0}/any({fn}:{comparator}({fn}/{object1}, {value}))".format(
@@ -173,12 +178,16 @@ class QueryStringPatternTranslator:
                 # check to form all other operator related query - STIX attribute
                 else:
                     # check to form hashes.'SHA-1' or hashes.'SHA-256' related query
-                    if mapped_field in ['fileStates.fileHash.hashType', 'processes.fileHash.hashType']:
-                        hash_type = stix_field.split('.')[1] if mapped_field in ['fileStates.fileHash.hashType'] else \
-                                    stix_field.split('.')[2]
-                        comparison_string += "{object0}/any({fn}:{fn}/{object1} {comparator} '{value}')".format(
-                            object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]), comparator='eq',
+                    if mapped_field in ['fileStates.fileHash.hashValue', 'processes.fileHash.hashValue']:
+                        hash_string = 'fileHash/hashType'
+                        hash_type = stix_field.split('.')[1] if mapped_field in ['fileStates.fileHash.hashValue'] else \
+                            stix_field.split('.')[2]
+                        comparison_string += "({object0}/any({fn}:{fn}/{object1} {comparator} '{value}')".format(
+                            object0=obj_array[0], fn=lambda_func, object1=hash_string, comparator='eq',
                             value=hash_type.lower().replace('-', ''))
+                        comparison_string += " and {object0}/any({fn}:{fn}/{object1} {comparator} {value}))".format(
+                            object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
+                            comparator=comparator, value=value)
                     # check to form dict of dict attribute related query - Graph API
                     elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
                         comparison_string += "{object} {comparator} {value}".format(
@@ -211,7 +220,7 @@ class QueryStringPatternTranslator:
                     for value in values:
                         comparison_string = format_comparision_string(comparison_string, mapped_field, lambda_func)
                         if values_count > 1:
-                            if "hashes" in stix_field or expression.negated:
+                            if expression.negated:
                                 comparison_string += " and "
                             else:
                                 comparison_string += " or "
@@ -221,7 +230,7 @@ class QueryStringPatternTranslator:
                 comparison_string = format_comparision_string(comparison_string, mapped_field, lambda_func)
 
             if mapped_fields_count > 1:
-                if "hashes" in stix_field or expression.negated:
+                if expression.negated:
                     comparison_string += " and "
                 else:
                     comparison_string += " or "

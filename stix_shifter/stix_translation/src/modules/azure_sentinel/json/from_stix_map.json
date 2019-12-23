@@ -27,8 +27,8 @@
     "fields": {
       "parent_directory_ref.path": ["fileStates.path"],
       "name": ["fileStates.name"],
-      "hashes.SHA-256": ["fileStates.fileHash.hashType", "fileStates.fileHash.hashValue"],
-      "hashes.SHA-1": ["fileStates.fileHash.hashType", "fileStates.fileHash.hashValue"]
+      "hashes.SHA-256": ["fileStates.fileHash.hashValue"],
+      "hashes.SHA-1": ["fileStates.fileHash.hashValue"]
     }
   },
    "process" : {
@@ -39,8 +39,8 @@
       "pid": ["processes.processId"],
       "parent_ref.pid": ["processes.parentProcessId"],
       "binary_ref.path": ["processes.path"],
-      "binary_ref.hashes.SHA-256": ["processes.fileHash.hashType", "processes.fileHash.hashValue"],
-      "binary_ref.hashes.SHA-1": ["processes.fileHash.hashType", "processes.fileHash.hashValue"]
+      "binary_ref.hashes.SHA-256": ["processes.fileHash.hashValue"],
+      "binary_ref.hashes.SHA-1": ["processes.fileHash.hashValue"]
     }
   },
   "domain-name": {
