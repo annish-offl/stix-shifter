@@ -153,7 +153,7 @@ class QueryStringPatternTranslator:
                 # to get ip address from data source using contains keyword ODATA query
                 if mapped_field in ['networkConnections.sourceAddress', 'networkConnections.destinationAddress',
                                     'fileStates.path', 'processes.path']:
-                    comparison_string += "{parent_attribute}/any({fn}:contains{child_attribute}, {value}))".format(
+                    comparison_string += "{parent_attribute}/any({fn}:contains({child_attribute}, {value}))".format(
                         parent_attribute=parent_attribute, fn=lambda_func, child_attribute=child_attribute,
                         value=value)
                 # check to form LIKE, MATCHES operator related query (contains) - STIX attribute
@@ -167,15 +167,16 @@ class QueryStringPatternTranslator:
                         hash_string = 'fileHash/hashType'
                         hash_type = stix_field.split('.')[1] if mapped_field == 'fileStates.fileHash.hashValue' else \
                             stix_field.split('.')[2]
-                        comparison_string += "({parent_attribute}/any({fn}:{fn}/{hash_string} {comparator} '{value}')"\
+                        comparison_string += "({parent_attribute}/any({fn}:{fn}/{hash_string} {comparator} '{value}')" \
                             .format(parent_attribute=parent_attribute, fn=lambda_func, hash_string=hash_string,
                                     comparator='eq', value=hash_type.lower().replace('-', ''))
-                        comparison_string += " and {parent_attribute}/any({fn}:{comparator}{child_attribute}, \
-                        {value})))" .format(parent_attribute=parent_attribute, fn=lambda_func,
-                                            child_attribute=child_attribute, comparator=comparator, value=value)
+                        comparison_string += " and {parent_attribute}/any({fn}:{comparator}({child_attribute}, " \
+                                             "{value})))".format(parent_attribute=parent_attribute, fn=lambda_func,
+                                                                 child_attribute=child_attribute,
+                                                                 comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - contains
                     else:
-                        comparison_string += "{parent_attribute}/any({fn}:{comparator}{child_attribute}, {value}))"\
+                        comparison_string += "{parent_attribute}/any({fn}:{comparator}({child_attribute}, {value}))" \
                             .format(parent_attribute=parent_attribute, fn=lambda_func, child_attribute=child_attribute,
                                     comparator=comparator, value=value)
                 # check to form all other operator related query - STIX attribute
@@ -185,19 +186,20 @@ class QueryStringPatternTranslator:
                         hash_string = 'fileHash/hashType'
                         hash_type = stix_field.split('.')[1] if mapped_field in ['fileStates.fileHash.hashValue'] else \
                             stix_field.split('.')[2]
-                        comparison_string += "({parent_attribute}/any({fn}:{fn}/{hash_string} {comparator} '{value}')"\
+                        comparison_string += "({parent_attribute}/any({fn}:{fn}/{hash_string} {comparator} '{value}')" \
                             .format(parent_attribute=parent_attribute, fn=lambda_func, hash_string=hash_string,
                                     comparator='eq', value=hash_type.lower().replace('-', ''))
-                        comparison_string += " and {parent_attribute}/any({fn}:{child_attribute} {comparator} \
-                        {value}))".format(parent_attribute=parent_attribute, fn=lambda_func,
-                                          child_attribute=child_attribute, comparator=comparator, value=value)
+                        comparison_string += " and {parent_attribute}/any({fn}:{child_attribute} {comparator} " \
+                                             "{value}))".format(parent_attribute=parent_attribute, fn=lambda_func,
+                                                                child_attribute=child_attribute, comparator=comparator,
+                                                                value=value)
                     # check to form dict of dict attribute related query - Graph API
                     elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
                         comparison_string += "tolower({object}) {comparator} {value}".format(
                             object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - other operators
                     else:
-                        comparison_string += "{parent_attribute}/any({fn}:{child_attribute} {comparator} {value})"\
+                        comparison_string += "{parent_attribute}/any({fn}:{child_attribute} {comparator} {value})" \
                             .format(parent_attribute=parent_attribute, fn=lambda_func, child_attribute=child_attribute,
                                     comparator=comparator, value=value)
             # check for custom attribute
