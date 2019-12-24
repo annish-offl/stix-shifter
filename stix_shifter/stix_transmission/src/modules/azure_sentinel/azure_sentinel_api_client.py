@@ -33,7 +33,7 @@ class APIClient:
         return self.client.call_api(self.endpoint, 'GET')
 
     def run_search(self, query_expression, offset, length):
-        """get the response from MSatp endpoints
+        """get the response from azure_sentinel endpoints
         :param query_expression: str, search_id
         :param offset: int,offset value
         :param length: int,length value
@@ -47,7 +47,7 @@ class APIClient:
         return self.client.call_api(self.endpoint, 'GET', headers, urldata=params)
 
     def next_page_run_search(self, next_page_url):
-        """get the response from MSatp endpoints
+        """get the response from azure_sentinel endpoints
         :param next_page_url: str, search_id
         :return: response, json object"""
         headers = dict()

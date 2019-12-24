@@ -10,10 +10,6 @@ START_STOP_PATTERN = r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z)"
 LOGGER = logging.getLogger(__name__)
 
 
-class OperatorNotSupported(Exception):
-    pass
-
-
 class QueryStringPatternTranslator:
     COUNTER = 0
 
@@ -69,7 +65,7 @@ class QueryStringPatternTranslator:
         value_list = value.values
         format_list = []
         for item in value_list:
-            format_list.append('\'{}\''.format(item))
+            format_list.append('\'{}\''.format(item.lower()))
         return format_list
 
     @staticmethod
@@ -80,7 +76,7 @@ class QueryStringPatternTranslator:
          :param value: str
          :return: str
          """
-        return '\'{}\''.format(value)
+        return '\'{}\''.format(value.lower())
 
     @staticmethod
     def _format_equality(value) -> str:
@@ -89,7 +85,7 @@ class QueryStringPatternTranslator:
           :param value: str
           :return: str
           """
-        return '\'{}\''.format(value)
+        return '\'{}\''.format(value.lower())
 
     @staticmethod
     def _format_like(value) -> str:
@@ -98,15 +94,15 @@ class QueryStringPatternTranslator:
         :param value: str
         :return: str
         """
-        return '\'{}\''.format(value)
+        return '\'{}\''.format(value.lower())
 
     @staticmethod
     def _escape_value(value) -> str:
         """
-            Formats and replaces backslashes and single quoted parenthesis
-            :param value: str
-            :return: str
-            """
+        Formats and replaces backslashes and single quoted parenthesis
+        :param value: str
+        :return: str
+        """
         if isinstance(value, str):
             return '{}'.format(value.replace('\\', '\\\\').replace('\"', '\\"').replace('(', '\\(').replace(')', '\\)'))
         else:
@@ -115,10 +111,10 @@ class QueryStringPatternTranslator:
     @staticmethod
     def _format_value_without_quotes(value):
         """
-            Formats and replaces values with escape character into value without quotes
-            :param value: str
-            :return: str
-            """
+        Formats and replaces values with escape character into value without quotes
+        :param value: str
+        :return: str
+        """
         values = []
         if isinstance(value, list):
             for each in value:
@@ -131,14 +127,14 @@ class QueryStringPatternTranslator:
     @staticmethod
     def _parse_mapped_fields(expression, value, comparator, stix_field, mapped_fields_array, counter):
         """
-              Mapping the stix object property with their corresponding property in sentinel odata query
-              from_stix_map.json will be used for mapping
-              :param expression: expression object, ANTLR parsed expression object
-              :param value: str
-              :param comparator: str
-              :param mapped_fields_array: list, Mapping available in from_stix_map.json
-              :return: str, whose part of the odata query for each value
-              """
+        Mapping the stix object property with their corresponding property in sentinel odata query
+        from_stix_map.json will be used for mapping
+        :param expression: expression object, ANTLR parsed expression object
+        :param value: str
+        :param comparator: str
+        :param mapped_fields_array: list, Mapping available in from_stix_map.json
+        :return: str, whose part of the odata query for each value
+        """
         comparison_string = ""
         values = value
         mapped_fields_count = len(mapped_fields_array)
@@ -147,16 +143,17 @@ class QueryStringPatternTranslator:
             # check for STIX attribute
             if '.' in mapped_field:
                 obj_array = mapped_field.split('.')
-                # temp fix for IP addr value due to data source wrong format
+                # ip address in data source is like "sourceAddress": "IP: 92.63.194.101 [2]\r"
+                # to get ip address from data source using contains keyword ODATA query
                 if mapped_field in ['networkConnections.sourceAddress', 'networkConnections.destinationAddress',
                                     'fileStates.path', 'processes.path']:
-                    comparison_string += "{object0}/any({fn}:contains({fn}/{object1}, {value}))".format(
+                    comparison_string += "{object0}/any({fn}:contains(tolower({fn}/{object1}), {value}))".format(
                         object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
                         value=value)
                 # check to form LIKE, MATCHES operator related query (contains) - STIX attribute
                 elif comparator == 'contains':
                     if mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                        comparison_string += "{comparator}({object}, {value})".format(
+                        comparison_string += "{comparator}(tolower({object}), {value})".format(
                             object='/'.join(obj_array), comparator=comparator, value=value)
                     # check to form hashes.'SHA-1' or hashes.'SHA-256' or binary_ref.hashes.'SHA-1' or \
                     # binary_ref.hashes.'SHA-256' related query
@@ -167,12 +164,12 @@ class QueryStringPatternTranslator:
                         comparison_string += "({object0}/any({fn}:{fn}/{object1} {comparator} '{value}')".format(
                             object0=obj_array[0], fn=lambda_func, object1=hash_string, comparator='eq',
                             value=hash_type.lower().replace('-', ''))
-                        comparison_string += " and {object0}/any({fn}:{comparator}({fn}/{object1}, {value})))".format(
-                            object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
-                            comparator=comparator, value=value)
+                        comparison_string += " and {object0}/any({fn}:{comparator}(tolower({fn}/{object1}), {value})))" \
+                            .format(object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
+                                    comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - contains
                     else:
-                        comparison_string += "{object0}/any({fn}:{comparator}({fn}/{object1}, {value}))".format(
+                        comparison_string += "{object0}/any({fn}:{comparator}(tolower({fn}/{object1}), {value}))".format(
                             object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
                             comparator=comparator, value=value)
                 # check to form all other operator related query - STIX attribute
@@ -185,16 +182,16 @@ class QueryStringPatternTranslator:
                         comparison_string += "({object0}/any({fn}:{fn}/{object1} {comparator} '{value}')".format(
                             object0=obj_array[0], fn=lambda_func, object1=hash_string, comparator='eq',
                             value=hash_type.lower().replace('-', ''))
-                        comparison_string += " and {object0}/any({fn}:{fn}/{object1} {comparator} {value}))".format(
-                            object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
-                            comparator=comparator, value=value)
+                        comparison_string += " and {object0}/any({fn}:tolower({fn}/{object1}) {comparator} {value}))" \
+                            .format(object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
+                                    comparator=comparator, value=value)
                     # check to form dict of dict attribute related query - Graph API
                     elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                        comparison_string += "{object} {comparator} {value}".format(
+                        comparison_string += "tolower({object}) {comparator} {value}".format(
                             object='/'.join(obj_array), comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - other operators
                     else:
-                        comparison_string += "{object0}/any({fn}:{fn}/{object1} {comparator} {value})".format(
+                        comparison_string += "{object0}/any({fn}:tolower({fn}/{object1}) {comparator} {value})".format(
                             object0=obj_array[0], fn=lambda_func, object1='/'.join(obj_array[1:]),
                             comparator=comparator, value=value)
             # check for custom attribute
@@ -309,9 +306,9 @@ class QueryStringPatternTranslator:
 
             if expression.negated:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
-                    raise OperatorNotSupported("NOT Operator is not supported for LIKE and MATCHES")
+                    raise NotImplementedError("NOT Operator is not supported for LIKE and MATCHES")
                 elif stix_object in ['ipv4-addr', 'ipv6-addr'] or stix_field in ['src_ref.value', 'dst_ref.value']:
-                    raise OperatorNotSupported("NOT Operator is not supported for IPV4 or IPV6 address")
+                    raise NotImplementedError("NOT Operator is not supported for IPV4 or IPV6 address")
 
                 comparator = self.negated_comparator_lookup.get(expression.comparator)
 
