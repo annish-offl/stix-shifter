@@ -145,7 +145,7 @@ class QueryStringPatternTranslator:
                 parent_child_obj_array = mapped_field.split('.')
                 parent_attribute = parent_child_obj_array[0]
                 child_attribute_path = '/'.join(parent_child_obj_array[1:])
-                if stix_field in ['pid', 'parent_ref.pid', 'account_last_login']:
+                if stix_field in ['pid', 'parent_ref.pid', 'account_last_login', 'provider', 'vendor']:
                     child_attribute = '{fn}/'.format(fn=lambda_func) + child_attribute_path
                 else:
                     child_attribute = 'tolower({fn}/'.format(fn=lambda_func) + child_attribute_path + ')'
@@ -206,11 +206,11 @@ class QueryStringPatternTranslator:
             else:
                 # check for LIKE, MATCHES operator (contains) - custom attribute
                 if comparator == 'contains':
-                    comparison_string += "{comparator}({mapped_field}, {value})".format(
+                    comparison_string += "{comparator}(tolower({mapped_field}), {value})".format(
                         mapped_field=mapped_field, comparator=comparator, value=value)
                 # check to form all other operator related query - custom attribute
                 else:
-                    comparison_string += "{mapped_field} {comparator} {value}".format(
+                    comparison_string += "tolower({mapped_field}) {comparator} {value}".format(
                         mapped_field=mapped_field, comparator=comparator, value=value)
             return comparison_string
 
