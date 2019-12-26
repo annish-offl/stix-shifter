@@ -175,7 +175,7 @@ class QueryStringPatternTranslator:
                 # check to form LIKE, MATCHES operator related query (contains) - STIX attribute
                 elif comparator == 'contains':
                     if mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                        comparison_string += "{comparator}(tolower({object}), {value})".format(
+                        comparison_string += "{comparator}({object}, {value})".format(
                             object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
                     # check to form hashes.'SHA-1' or hashes.'SHA-256' or binary_ref.hashes.'SHA-1' or \
                     # binary_ref.hashes.'SHA-256' related query
@@ -211,7 +211,7 @@ class QueryStringPatternTranslator:
                                                                 value=value)
                     # check to form dict of dict attribute related query - Graph API
                     elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                        comparison_string += "tolower({object}) {comparator} {value}".format(
+                        comparison_string += "{object} {comparator} {value}".format(
                             object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - other operators
                     else:
