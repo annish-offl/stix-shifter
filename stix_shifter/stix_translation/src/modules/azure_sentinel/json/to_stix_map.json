@@ -255,14 +255,26 @@
     "key": "file.hashes.SHA-256",
     "object": "file3"
   },
-  "processes_0_name": {
+  "processes_0_name": [
+    {
+    "key": "file.name",
+    "object": "file0"
+    },
+    {
     "key": "process.name",
     "object": "process0"
-  },
-  "processes_1_name": {
+    }
+  ],
+  "processes_1_name": [
+    {
+    "key": "file.name",
+    "object": "file1"
+    },
+    {
     "key": "process.name",
     "object": "process1"
-  },
+   }
+  ],
   "processes_2_name": {
     "key": "process.name",
     "object": "process2"
@@ -382,23 +394,14 @@
    "processes_0_parentProcessName": [
        {
           "key": "process.name",
-          "object": "ppn0"
-       },
-       {
-          "key": "process.parent_ref",
-          "object": "process0",
-          "references": "ppn0"
+          "object": "process0"
        }
    ],
   "processes_1_parentProcessName": [
        {
-          "key": "process.name",
-          "object": "ppn1"
-       },
-       {
           "key": "process.parent_ref",
           "object": "process1",
-          "references": "ppn1"
+          "references": "process0"
        }
    ],
   "processes_2_parentProcessName": [
@@ -488,19 +491,19 @@
           "object": "ua_uid3"
   },
   "userStates_0_accountName": {
-          "key": "user-account.account_login",
+          "key": "user-account.user_id",
           "object": "ua_an0"
   },
   "userStates_1_accountName": {
-          "key": "user-account.account_login",
+          "key": "user-account.user_id",
           "object": "ua_an1"
   },
   "userStates_2_accountName": {
-          "key": "user-account.account_login",
+          "key": "user-account.user_id",
           "object": "ua_an2"
   },
   "userStates_3_accountName": {
-          "key": "user-account.account_login",
+          "key": "user-account.user_id",
           "object": "ua_an3"
   },
   "userStates_0_logonDateTime": {
