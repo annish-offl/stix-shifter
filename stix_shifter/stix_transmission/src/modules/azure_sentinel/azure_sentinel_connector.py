@@ -96,14 +96,20 @@ class Connector(BaseConnector):
                 # flatten result json to single level
                 for node in return_obj['data']:
 
+                    # new code
+                    if len(node['processes']) > 1:
+                        del node['fileStates']
+
                     # customize results for fileHashes
-                    for file in node["fileStates"]:
-                        if file["fileHash"] is not None:
-                            file[file["fileHash"]['hashType']] = file["fileHash"]['hashValue']
-                    
-                    for process in node["processes"]:
-                        if process["fileHash"] is not None:
-                            process[process["fileHash"]['hashType']] = process["fileHash"]['hashValue']
+                    if 'fileStates' in node:
+                        for file in node["fileStates"]:
+                            if file["fileHash"] is not None:
+                                file[file["fileHash"]['hashType']] = file["fileHash"]['hashValue']
+
+                    if 'processes' in node:
+                        for process in node["processes"]:
+                            if process["fileHash"] is not None:
+                                process[process["fileHash"]['hashType']] = process["fileHash"]['hashValue']
 
                     # pass the alert nodes for JSON flattening
                     flat_json = Connector.flatten_json(node)

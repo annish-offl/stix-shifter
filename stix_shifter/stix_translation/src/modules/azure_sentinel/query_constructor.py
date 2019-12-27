@@ -65,7 +65,7 @@ class QueryStringPatternTranslator:
         value_list = value.values
         format_list = []
         for item in value_list:
-            format_list.append('\'{}\''.format(item).lower())
+            format_list.append('\'{}\''.format(item))
         return format_list
 
     @staticmethod
@@ -76,7 +76,7 @@ class QueryStringPatternTranslator:
          :param value: str
          :return: str
          """
-        return '\'{}\''.format(value).lower()
+        return '\'{}\''.format(value)
 
     @staticmethod
     def _format_equality(value) -> str:
@@ -85,7 +85,7 @@ class QueryStringPatternTranslator:
           :param value: str
           :return: str
           """
-        return '\'{}\''.format(value).lower()
+        return '\'{}\''.format(value)
 
     @staticmethod
     def _format_like(value) -> str:
@@ -94,7 +94,7 @@ class QueryStringPatternTranslator:
         :param value: str
         :return: str
         """
-        return '\'{}\''.format(value).lower()
+        return '\'{}\''.format(value)
 
     @staticmethod
     def _escape_value(value) -> str:
@@ -122,6 +122,22 @@ class QueryStringPatternTranslator:
             value = values
         else:
             value = value.replace('\'', '')
+        return value
+
+    @staticmethod
+    def _format_value_to_lower_case(value):
+        """
+        Formats and replaces values with escape character into value without quotes
+        :param value: str
+        :return: str
+        """
+        values = []
+        if isinstance(value, list):
+            for each in value:
+                values.append('{}'.format(each).lower())
+            value = values
+        else:
+            value = value.lower()
         return value
 
     @staticmethod
@@ -159,7 +175,7 @@ class QueryStringPatternTranslator:
                 # check to form LIKE, MATCHES operator related query (contains) - STIX attribute
                 elif comparator == 'contains':
                     if mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                        comparison_string += "{comparator}(tolower({object}), {value})".format(
+                        comparison_string += "{comparator}({object}, {value})".format(
                             object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
                     # check to form hashes.'SHA-1' or hashes.'SHA-256' or binary_ref.hashes.'SHA-1' or \
                     # binary_ref.hashes.'SHA-256' related query
@@ -195,7 +211,7 @@ class QueryStringPatternTranslator:
                                                                 value=value)
                     # check to form dict of dict attribute related query - Graph API
                     elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                        comparison_string += "tolower({object}) {comparator} {value}".format(
+                        comparison_string += "{object} {comparator} {value}".format(
                             object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
                     # check to form list of dicts attribute related query - other operators
                     else:
@@ -323,6 +339,9 @@ class QueryStringPatternTranslator:
             # to remove single quotes in specific field value
             if stix_field in ['pid', 'parent_ref.pid', 'account_last_login']:
                 value = self._format_value_without_quotes(value)
+
+            if stix_field not in ['provider', 'vendor']:
+                value = self._format_value_to_lower_case(value)
 
             self.COUNTER += 1
             comparison_string = self._parse_mapped_fields(expression, value, comparator, stix_field,

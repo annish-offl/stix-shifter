@@ -50,7 +50,7 @@
   },
   "user-account": {
     "fields": {
-      "user_id": ["userStates.aadUserId"],
+      "user_id": ["userStates.accountName"],
       "account_login": ["userStates.accountName"],
       "account_last_login": ["userStates.logonDateTime"]
     }
