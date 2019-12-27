@@ -124,8 +124,9 @@ class TestStixToQuery(unittest.TestCase):
         query = translation.translate('azure_sentinel', 'query', '{}', stix_pattern)
         query['queries'] = _remove_timestamp_from_query(query['queries'])
 
-        queries = ["(contains(title, 'suspicious') and azureTenantId ne 'sb73e5ba' and azureTenantId ne 'b73e5ba8') "
-                   "and (eventDateTime ge 2019-12-24T09:49:57.598Z and eventDateTime le 2019-12-24T09:54:57.598Z)"]
+        queries = ["(contains(tolower(title), 'suspicious') and tolower(azureTenantId) ne 'sb73e5ba' and tolower("
+                   "azureTenantId) ne 'b73e5ba8') and (eventDateTime ge 2019-12-27T04:50:48.593Z and eventDateTime le "
+                   "2019-12-27T04:55:48.593Z)"]
         queries = _remove_timestamp_from_query(queries)
         self._test_query_assertions(query, queries)
 
@@ -209,9 +210,9 @@ class TestStixToQuery(unittest.TestCase):
                    "and eventDateTime le 2019-09-23T10:43:10.453Z)) or (((fileStates/any("
                    "query2:query2/fileHash/hashType eq 'sha1') and fileStates/any(query2:tolower("
                    "query2/fileHash/hashValue) eq 'b6d237154f2e528f0b503b58b025862d66b02b73'))) and (eventDateTime ge "
-                   "2019-09-10T08:43:10.003Z and eventDateTime le 2019-09-23T10:43:10.453Z))) or (((tolower("
-                   "vendorInformation/vendor) eq 'Microsoft') and (eventDateTime ge 2019-09-10T08:43:10.003Z and "
-                   "eventDateTime le 2019-09-23T10:43:10.453Z)) or ((contains(tolower(vendorInformation/provider), "
+                   "2019-09-10T08:43:10.003Z and eventDateTime le 2019-09-23T10:43:10.453Z))) or ((("
+                   "vendorInformation/vendor eq 'Microsoft') and (eventDateTime ge 2019-09-10T08:43:10.003Z and "
+                   "eventDateTime le 2019-09-23T10:43:10.453Z)) or ((contains(vendorInformation/provider, "
                    "'Microsoft')) and (eventDateTime ge 2019-09-10T08:43:10.003Z and eventDateTime le "
                    "2019-09-23T10:43:10.453Z)))"]
 
