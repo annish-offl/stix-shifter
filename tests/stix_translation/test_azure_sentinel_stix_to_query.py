@@ -124,8 +124,9 @@ class TestStixToQuery(unittest.TestCase):
         query = translation.translate('azure_sentinel', 'query', '{}', stix_pattern)
         query['queries'] = _remove_timestamp_from_query(query['queries'])
 
-        queries = ["(contains(title, 'suspicious') and azureTenantId ne 'sb73e5ba' and azureTenantId ne 'b73e5ba8') "
-                   "and (eventDateTime ge 2019-12-24T09:49:57.598Z and eventDateTime le 2019-12-24T09:54:57.598Z)"]
+        queries = ["(contains(tolower(title), 'suspicious') and tolower(azureTenantId) ne 'sb73e5ba' and tolower("
+                   "azureTenantId) ne 'b73e5ba8') and (eventDateTime ge 2019-12-27T04:50:48.593Z and eventDateTime le "
+                   "2019-12-27T04:55:48.593Z)"]
         queries = _remove_timestamp_from_query(queries)
         self._test_query_assertions(query, queries)
 
