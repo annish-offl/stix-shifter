@@ -209,9 +209,9 @@ class TestStixToQuery(unittest.TestCase):
                    "and eventDateTime le 2019-09-23T10:43:10.453Z)) or (((fileStates/any("
                    "query2:query2/fileHash/hashType eq 'sha1') and fileStates/any(query2:tolower("
                    "query2/fileHash/hashValue) eq 'b6d237154f2e528f0b503b58b025862d66b02b73'))) and (eventDateTime ge "
-                   "2019-09-10T08:43:10.003Z and eventDateTime le 2019-09-23T10:43:10.453Z))) or (((tolower("
-                   "vendorInformation/vendor) eq 'Microsoft') and (eventDateTime ge 2019-09-10T08:43:10.003Z and "
-                   "eventDateTime le 2019-09-23T10:43:10.453Z)) or ((contains(tolower(vendorInformation/provider), "
+                   "2019-09-10T08:43:10.003Z and eventDateTime le 2019-09-23T10:43:10.453Z))) or ((("
+                   "vendorInformation/vendor eq 'Microsoft') and (eventDateTime ge 2019-09-10T08:43:10.003Z and "
+                   "eventDateTime le 2019-09-23T10:43:10.453Z)) or ((contains(vendorInformation/provider, "
                    "'Microsoft')) and (eventDateTime ge 2019-09-10T08:43:10.003Z and eventDateTime le "
                    "2019-09-23T10:43:10.453Z)))"]
 
