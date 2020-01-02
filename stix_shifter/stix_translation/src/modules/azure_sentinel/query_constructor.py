@@ -320,11 +320,14 @@ class QueryStringPatternTranslator:
                     raise NotImplementedError("NOT Operator is not supported for LIKE and MATCHES")
                 elif stix_object in ['ipv4-addr', 'ipv6-addr'] or stix_field in ['src_ref.value', 'dst_ref.value']:
                     raise NotImplementedError("NOT Operator is not supported for IPV4 or IPV6 address")
-
                 comparator = self.negated_comparator_lookup.get(expression.comparator)
 
             # to remove single quotes in specific field value
             if stix_field in ['pid', 'parent_ref.pid', 'account_last_login']:
+                if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
+                    raise NotImplementedError("Comparison operator {operator} unsupported for {stix_field} "
+                                              "attribute in Senitnel connector".format(
+                                               operator=expression.comparator.name.upper(), stix_field=stix_field))
                 value = self._format_value_without_quotes(value)
 
             if stix_field not in ['provider', 'vendor']:
