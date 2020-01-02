@@ -30,7 +30,11 @@ class APIClient:
 
     def ping_box(self):
         """Ping the endpoint."""
-        return self.client.call_api(self.endpoint, 'GET')
+        headers = dict()
+        headers['Accept'] = 'application/json'
+        params = dict()
+        params['$top'] = 1
+        return self.client.call_api(self.endpoint, 'GET', headers, urldata=params)
 
     def run_search(self, query_expression, offset, length):
         """get the response from azure_sentinel endpoints
