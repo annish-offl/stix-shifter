@@ -474,22 +474,6 @@
           "references": "directory3"
       }
   ],
-  "userStates_0_aadUserId": {
-          "key": "user-account.user_id",
-          "object": "ua_uid0"
-  },
-  "userStates_1_aadUserId": {
-          "key": "user-account.user_id",
-          "object": "ua_uid1"
-  },
-  "userStates_2_aadUserId": {
-          "key": "user-account.user_id",
-          "object": "ua_uid2"
-  },
-  "userStates_3_aadUserId": {
-          "key": "user-account.user_id",
-          "object": "ua_uid3"
-  },
   "userStates_0_accountName": {
           "key": "user-account.user_id",
           "object": "ua_an0"
