@@ -327,7 +327,7 @@ class QueryStringPatternTranslator:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
                     raise NotImplementedError("Comparison operator '{operator}' unsupported for '{stix_field}' "
                                               "attribute in Senitnel connector".format(
-                        operator=expression.comparator.name.upper(), stix_field=stix_field))
+                                               operator=expression.comparator.name.upper(), stix_field=stix_field))
                 value = self._format_value_without_quotes(value)
 
             if stix_field not in ['provider', 'vendor']:
