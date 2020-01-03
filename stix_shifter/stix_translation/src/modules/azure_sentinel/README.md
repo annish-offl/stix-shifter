@@ -224,15 +224,14 @@ Sentinel data to STIX mapping is defined in `to_stix_map.json`
 
 Sample data:
 
-`translate azure_sentinel results "{\"type\":\"identity\",\"id\":\"identity--f431f809-377b-45e0-aa1c-6a4751cae5ff\",\"name\":\"azure_sentinel\",\"identity_class\":\"events\"}" "[{'id': '2518254730385772806_da637123660281149084_-953649836:4wVg68RS3EYNc3Qb7xJUNrYw9KEUBA1wZ3IVwRA0hmg=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Suspected credential theft activity', 'comments': [], 'createdDateTime': '2019-12-20T07:45:03.1726913Z', 'description': 'This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.', 'detectionIds': [], 'eventDateTime': '2019-12-20T07:42:41.4227193Z', 'lastModifiedDateTime': '2019-12-20T07:45:06.1246819Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'medium', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254730385772806_da637123660281149084_-953649836:4wVg68RS3EYNc3Qb7xJUNrYw9KEUBA1wZ3IVwRA0hmg=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660281149084_-953649836', 'status': 'newAlert', 'title': 'Suspected credential theft activity', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'cmd.exe', 'fileStates_0_path': 'C:\\Windows\\System32\\cmd.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': '6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b', 'fileStates_0_sha256': '6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518254730385772806_da637123660281149084_-953649836:JGqJp4SlSroeE_6c3bZL6R6oWUal2lFJRO3d6N8jgyk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Suspected credential theft activity', 'comments': [], 'createdDateTime': '2019-12-20T07:45:03.5008384Z', 'description': 'This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.', 'detectionIds': [], 'eventDateTime': '2019-12-20T07:42:41.4227193Z', 'lastModifiedDateTime': '2019-12-20T07:45:06.0810972Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'medium', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254730385772806_da637123660281149084_-953649836:JGqJp4SlSroeE_6c3bZL6R6oWUal2lFJRO3d6N8jgyk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660281149084_-953649836', 'status': 'newAlert', 'title': 'Suspected credential theft activity', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'mimikatz.exe', 'fileStates_0_path': 'C:\\tools\\mimikatz-master\\lib\\x64\\mimikatz.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'fileStates_0_sha256': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518254730385772806_da637124247028408126_-1879876458:BBCp8DC2k8qr4fp7Msgx48xH9gEpcDzr23iW5U13eOY=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Malicious credential theft tool execution detected', 'comments': [], 'createdDateTime': '2019-12-20T07:45:02.5907596Z', 'description': "A known credential theft tool execution command line was detected.\nEither the process itself or its command line indicated an intent to dump users' credentials, keys, plain-text passwords and more.", 'detectionIds': [], 'eventDateTime': '2019-12-20T07:42:41.4227193Z', 'lastModifiedDateTime': '2019-12-20T07:45:06.0787927Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'high', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254730385772806_da637124247028408126_-1879876458:BBCp8DC2k8qr4fp7Msgx48xH9gEpcDzr23iW5U13eOY=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637124247028408126_-1879876458', 'status': 'newAlert', 'title': 'Malicious credential theft tool execution detected', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'mimikatz.exe', 'fileStates_0_path': 'C:\\tools\\mimikatz-master\\lib\\x64\\mimikatz.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'fileStates_0_sha256': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518254749537640003_da637123660281149084_-953649836:DZoKKwpp8DW6oF3Qs7ofnbkJihHMQSZR7jb02CnqdYU=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Suspected credential theft activity', 'comments': [], 'createdDateTime': '2019-12-20T07:14:28.0521419Z', 'description': 'This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.', 'detectionIds': [], 'eventDateTime': '2019-12-20T07:10:46.2359996Z', 'lastModifiedDateTime': '2019-12-20T07:14:31.5453569Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'medium', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254749537640003_da637123660281149084_-953649836:DZoKKwpp8DW6oF3Qs7ofnbkJihHMQSZR7jb02CnqdYU=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660281149084_-953649836', 'status': 'newAlert', 'title': 'Suspected credential theft activity', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'mimikatz.exe', 'fileStates_0_path': 'C:\\tools\\x64\\mimikatz.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'fileStates_0_sha256': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518254749496473232_da637123660275108740_1307429309:OMwAtExvCXaspczkTQBVXBsi2dv0wWIN9FDBz7OdYPA=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Malicious credential theft tool execution detected', 'comments': [], 'createdDateTime': '2019-12-20T07:14:27.8523166Z', 'description': "A known credential theft tool execution command line was detected.\nEither the process itself or its command line indicated an intent to dump users' credentials, keys, plain-text passwords and more.", 'detectionIds': [], 'eventDateTime': '2019-12-20T07:10:50.3526767Z', 'lastModifiedDateTime': '2019-12-20T07:14:31.2843135Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'high', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254749496473232_da637123660275108740_1307429309:OMwAtExvCXaspczkTQBVXBsi2dv0wWIN9FDBz7OdYPA=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660275108740_1307429309', 'status': 'newAlert', 'title': 'Malicious credential theft tool execution detected', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'mimikatz.exe', 'fileStates_0_path': 'C:\\tools\\x64\\mimikatz.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'fileStates_0_sha256': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518254749537640003_da637123660281149084_-953649836:3f_1OC23WuGNSs1hCfnrXClrrAx1IFQudnU9lMzh_uk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Suspected credential theft activity', 'comments': [], 'createdDateTime': '2019-12-20T07:14:27.8334132Z', 'description': 'This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.', 'detectionIds': [], 'eventDateTime': '2019-12-20T07:10:46.2359996Z', 'lastModifiedDateTime': '2019-12-20T07:14:30.3646432Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'medium', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254749537640003_da637123660281149084_-953649836:3f_1OC23WuGNSs1hCfnrXClrrAx1IFQudnU9lMzh_uk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660281149084_-953649836', 'status': 'newAlert', 'title': 'Suspected credential theft activity', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'cmd.exe', 'fileStates_0_path': 'C:\\Windows\\System32\\cmd.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': '6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b', 'fileStates_0_sha256': '6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518255317590087645_da637123660281149084_-953649836:s8JiygMV1ntGagdMudjSLVknmDJpM2Py5TywIR050Jc=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Suspected credential theft activity', 'comments': [], 'createdDateTime': '2019-12-19T15:27:07.7711541Z', 'description': 'This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.', 'detectionIds': [], 'eventDateTime': '2019-12-19T15:24:00.9912354Z', 'lastModifiedDateTime': '2019-12-19T15:27:13.7326316Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'medium', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518255317590087645_da637123660281149084_-953649836:s8JiygMV1ntGagdMudjSLVknmDJpM2Py5TywIR050Jc=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660281149084_-953649836', 'status': 'newAlert', 'title': 'Suspected credential theft activity', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'cmd.exe', 'fileStates_0_path': 'C:\\Windows\\System32\\cmd.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': '6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b', 'fileStates_0_sha256': '6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518255317590087645_da637123660275108740_1307429309:aLzgnH1c+c34Pr34M9XKv3kw3+eFR_4KTtOfRwzPEsc=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Malicious credential theft tool execution detected', 'comments': [], 'createdDateTime': '2019-12-19T15:27:07.1046226Z', 'description': "A known credential theft tool execution command line was detected.\nEither the process itself or its command line indicated an intent to dump users' credentials, keys, plain-text passwords and more.", 'detectionIds': [], 'eventDateTime': '2019-12-19T15:24:00.9912354Z', 'lastModifiedDateTime': '2019-12-19T15:27:13.7301763Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'high', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518255317590087645_da637123660275108740_1307429309:aLzgnH1c+c34Pr34M9XKv3kw3+eFR_4KTtOfRwzPEsc=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660275108740_1307429309', 'status': 'newAlert', 'title': 'Malicious credential theft tool execution detected', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'mimikatz.exe', 'fileStates_0_path': 'C:\\tools\\x64\\mimikatz.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'fileStates_0_sha256': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}, {'id': '2518255317590087645_da637123660281149084_-953649836:QZwuEMZFw_9KajuFRp9Dkq9ypMgKuspzliv+0DPbS64=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df', 'azureTenantId': 'b73e5ba8-34d5-495a-9901-06bdb84cf13e', 'azureSubscriptionId': '083de1fb-cd2d-4b7c-895a-2b5af1d091e8', 'tags': [], 'category': 'Suspected credential theft activity', 'comments': [], 'createdDateTime': '2019-12-19T15:27:08.504905Z', 'description': 'This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.', 'detectionIds': [], 'eventDateTime': '2019-12-19T15:24:00.9912354Z', 'lastModifiedDateTime': '2019-12-19T15:27:13.4695022Z', 'recommendedActions_0': '1. Make sure the machine is completely updated and all your software has the latest patch.', 'recommendedActions_1': '2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.', 'recommendedActions_2': '3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).', 'recommendedActions_3': '4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).', 'recommendedActions_4': '5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).', 'severity': 'medium', 'sourceMaterials_0': 'https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518255317590087645_da637123660281149084_-953649836:QZwuEMZFw_9KajuFRp9Dkq9ypMgKuspzliv+0DPbS64=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope', 'sourceMaterials_1': 'https://securitycenter.windows.com/alert/da637123660281149084_-953649836', 'status': 'newAlert', 'title': 'Suspected credential theft activity', 'vendorInformation_provider': 'ASC', 'vendorInformation_subProvider': 'MDATP', 'vendorInformation_vendor': 'Microsoft', 'cloudAppStates': [], 'fileStates_0_name': 'mimikatz.exe', 'fileStates_0_path': 'C:\\tools\\x64\\mimikatz.exe', 'fileStates_0_fileHash_hashType': 'sha256', 'fileStates_0_fileHash_hashValue': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'fileStates_0_sha256': 'bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde', 'hostStates_0_netBiosName': 'winsrv-target', 'historyStates': [], 'malwareStates': [], 'networkConnections': [], 'processes': [], 'registryKeyStates': [], 'triggers': [], 'userStates_0_accountName': 'testadmin', 'userStates_0_domainName': 'winsrv-target', 'userStates_0_emailRole': 'unknown', 'userStates_0_userPrincipalName': 'testadmin@winsrv-target', 'vulnerabilityStates': [], 'event_count': '1'}]"`
-
+`translate azure_sentinel results "{\"type\":\"identity\",\"id\":\"identity--f431f809-377b-45e0-aa1c-6a4751cae5ff\",\"name\":\"azure_sentinel\",\"identity_class\":\"events\"}" "[{\"id\": \"2518254730385772806_da637123660281149084_-953649836:4wVg68RS3EYNc3Qb7xJUNrYw9KEUBA1wZ3IVwRA0hmg=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df\", \"azureTenantId\": \"b73e5ba8-34d5-495a-9901-06bdb84cf13e\", \"azureSubscriptionId\": \"083de1fb-cd2d-4b7c-895a-2b5af1d091e8\", \"tags\": [], \"category\": \"Suspected credential theft activity\", \"comments\": [], \"createdDateTime\": \"2019-12-20T07:45:03.1726913Z\", \"description\": \"This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.\", \"detectionIds\": [], \"eventDateTime\": \"2019-12-20T07:42:41.4227193Z\", \"lastModifiedDateTime\": \"2019-12-20T07:45:06.1246819Z\", \"recommendedActions_0\": \"1. Make sure the machine is completely updated and all your software has the latest patch.\", \"recommendedActions_1\": \"2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.\", \"recommendedActions_2\": \"3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).\", \"recommendedActions_3\": \"4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).\", \"recommendedActions_4\": \"5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).\", \"severity\": \"medium\", \"sourceMaterials_0\": \"https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254730385772806_da637123660281149084_-953649836:4wVg68RS3EYNc3Qb7xJUNrYw9KEUBA1wZ3IVwRA0hmg=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope\", \"sourceMaterials_1\": \"https://securitycenter.windows.com/alert/da637123660281149084_-953649836\", \"status\": \"newAlert\", \"title\": \"Suspected credential theft activity\", \"vendorInformation_provider\": \"ASC\", \"vendorInformation_subProvider\": \"MDATP\", \"vendorInformation_vendor\": \"Microsoft\", \"cloudAppStates\": [], \"fileStates_0_name\": \"cmd.exe\", \"fileStates_0_path\": \"C:\\Windows\\System32\\cmd.exe\", \"fileStates_0_fileHash_hashType\": \"sha256\", \"fileStates_0_fileHash_hashValue\": \"6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b\", \"fileStates_0_sha256\": \"6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b\", \"hostStates_0_netBiosName\": \"winsrv-target\", \"historyStates\": [], \"malwareStates\": [], \"networkConnections\": [], \"processes\": [], \"registryKeyStates\": [], \"triggers\": [], \"userStates_0_accountName\": \"testadmin\", \"userStates_0_domainName\": \"winsrv-target\", \"userStates_0_emailRole\": \"unknown\", \"userStates_0_userPrincipalName\": \"testadmin@winsrv-target\", \"vulnerabilityStates\": [], \"event_count\": \"1\"}, {\"id\": \"2518254730385772806_da637123660281149084_-953649836:JGqJp4SlSroeE_6c3bZL6R6oWUal2lFJRO3d6N8jgyk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df\", \"azureTenantId\": \"b73e5ba8-34d5-495a-9901-06bdb84cf13e\", \"azureSubscriptionId\": \"083de1fb-cd2d-4b7c-895a-2b5af1d091e8\", \"tags\": [], \"category\": \"Suspected credential theft activity\", \"comments\": [], \"createdDateTime\": \"2019-12-20T07:45:03.5008384Z\", \"description\": \"This program exhibits suspect characteristics potentially associated with credential theft.  Once obtained, these credentials are often used in lateral movement activities to infiltrate other machines and servers in the network.\", \"detectionIds\": [], \"eventDateTime\": \"2019-12-20T07:42:41.4227193Z\", \"lastModifiedDateTime\": \"2019-12-20T07:45:06.0810972Z\", \"recommendedActions_0\": \"1. Make sure the machine is completely updated and all your software has the latest patch.\", \"recommendedActions_1\": \"2. Contact your incident response team. NOTE: If you don’t have an incident response team, contact Microsoft Support for architectural remediation and forensic.\", \"recommendedActions_2\": \"3. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx).\", \"recommendedActions_3\": \"4. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx).\", \"recommendedActions_4\": \"5. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx).\", \"severity\": \"medium\", \"sourceMaterials_0\": \"https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518254730385772806_da637123660281149084_-953649836:JGqJp4SlSroeE_6c3bZL6R6oWUal2lFJRO3d6N8jgyk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df/subscriptionId/083de1fb-cd2d-4b7c-895a-2b5af1d091e8/resourceGroup/eastUS/referencedFrom/alertDeepLink/location/westeurope\", \"sourceMaterials_1\": \"https://securitycenter.windows.com/alert/da637123660281149084_-953649836\", \"status\": \"newAlert\", \"title\": \"Suspected credential theft activity\", \"vendorInformation_provider\": \"ASC\", \"vendorInformation_subProvider\": \"MDATP\", \"vendorInformation_vendor\": \"Microsoft\", \"cloudAppStates\": [], \"fileStates_0_name\": \"mimikatz.exe\", \"fileStates_0_path\": \"C:\\tools\\mimikatz-master\\lib\\x64\\mimikatz.exe\", \"fileStates_0_fileHash_hashType\": \"sha256\", \"fileStates_0_fileHash_hashValue\": \"bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde\", \"fileStates_0_sha256\": \"bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde\", \"hostStates_0_netBiosName\": \"winsrv-target\", \"historyStates\": [], \"malwareStates\": [], \"networkConnections\": [], \"processes\": [], \"registryKeyStates\": [], \"triggers\": [], \"userStates_0_accountName\": \"testadmin\", \"userStates_0_domainName\": \"winsrv-target\", \"userStates_0_emailRole\": \"unknown\", \"userStates_0_userPrincipalName\": \"testadmin@winsrv-target\", \"vulnerabilityStates\": [], \"event_count\": \"1\"}]"`
 
 Will return the following STIX observable:
 
 ```json
 {
     "type": "bundle",
-    "id": "bundle--85f43de7-4165-4917-9eee-29e64628502b",
+    "id": "bundle--ca7550fb-7417-4754-8462-b968174597b4",
     "objects": [
         {
             "type": "identity",
@@ -241,11 +240,11 @@ Will return the following STIX observable:
             "identity_class": "events"
         },
         {
-            "id": "observed-data--b7f6f0e1-cbd0-4930-abc1-94a818f07df9",
+            "id": "observed-data--50d19bda-0e87-4ac1-a134-718994512c29",
             "type": "observed-data",
             "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.494Z",
-            "modified": "2020-01-03T10:37:11.494Z",
+            "created": "2020-01-03T12:57:29.700Z",
+            "modified": "2020-01-03T12:57:29.700Z",
             "objects": {
                 "0": {
                     "type": "file",
@@ -283,11 +282,11 @@ Will return the following STIX observable:
             "number_observed": 1
         },
         {
-            "id": "observed-data--4d6a655b-aea8-48dd-b320-e488362d96d5",
+            "id": "observed-data--a0f2cce6-f664-461c-bd7d-dd857c0b34f2",
             "type": "observed-data",
             "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.497Z",
-            "modified": "2020-01-03T10:37:11.497Z",
+            "created": "2020-01-03T12:57:29.702Z",
+            "modified": "2020-01-03T12:57:29.702Z",
             "objects": {
                 "0": {
                     "type": "file",
@@ -322,300 +321,6 @@ Will return the following STIX observable:
             },
             "first_observed": "2019-12-20T07:42:41.4227193Z",
             "last_observed": "2019-12-20T07:42:41.4227193Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--9ff66153-1bc7-4a29-a4d7-ac2c369bdbc3",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.499Z",
-            "modified": "2020-01-03T10:37:11.499Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "mimikatz.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\tools\\mimikatz-master\\lib\\x64"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518254730385772806_da637124247028408126_-1879876458:BBCp8DC2k8qr4fp7Msgx48xH9gEpcDzr23iW5U13eOY=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Malicious credential theft tool execution detected",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-20T07:42:41.4227193Z",
-            "last_observed": "2019-12-20T07:42:41.4227193Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--327c615d-743c-4356-9fef-d13fde3266c8",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.500Z",
-            "modified": "2020-01-03T10:37:11.500Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "mimikatz.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\tools\\x64"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518254749537640003_da637123660281149084_-953649836:DZoKKwpp8DW6oF3Qs7ofnbkJihHMQSZR7jb02CnqdYU=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Suspected credential theft activity",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-20T07:10:46.2359996Z",
-            "last_observed": "2019-12-20T07:10:46.2359996Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--10ba0679-ebc1-4835-8372-da41b4ff80a4",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.502Z",
-            "modified": "2020-01-03T10:37:11.502Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "mimikatz.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\tools\\x64"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518254749496473232_da637123660275108740_1307429309:OMwAtExvCXaspczkTQBVXBsi2dv0wWIN9FDBz7OdYPA=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Malicious credential theft tool execution detected",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-20T07:10:50.3526767Z",
-            "last_observed": "2019-12-20T07:10:50.3526767Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--69abf25f-9b9b-4d59-bbff-ebbd2eb0ad6a",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.503Z",
-            "modified": "2020-01-03T10:37:11.503Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "cmd.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\Windows\\System32"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518254749537640003_da637123660281149084_-953649836:3f_1OC23WuGNSs1hCfnrXClrrAx1IFQudnU9lMzh_uk=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Suspected credential theft activity",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-20T07:10:46.2359996Z",
-            "last_observed": "2019-12-20T07:10:46.2359996Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--7bb69986-d7bf-474d-a3da-28849e7bc540",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.505Z",
-            "modified": "2020-01-03T10:37:11.505Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "cmd.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "6f88fb88ffb0f1d5465c2826e5b4f523598b1b8378377c8378ffebc171bad18b"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\Windows\\System32"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518255317590087645_da637123660281149084_-953649836:s8JiygMV1ntGagdMudjSLVknmDJpM2Py5TywIR050Jc=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Suspected credential theft activity",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-19T15:24:00.9912354Z",
-            "last_observed": "2019-12-19T15:24:00.9912354Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--df61837d-0fa1-49b2-a1c3-c902c424d83d",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.506Z",
-            "modified": "2020-01-03T10:37:11.506Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "mimikatz.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\tools\\x64"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518255317590087645_da637123660275108740_1307429309:aLzgnH1c+c34Pr34M9XKv3kw3+eFR_4KTtOfRwzPEsc=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Malicious credential theft tool execution detected",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-19T15:24:00.9912354Z",
-            "last_observed": "2019-12-19T15:24:00.9912354Z",
-            "number_observed": 1
-        },
-        {
-            "id": "observed-data--29cb4361-05c0-45fd-b929-37feb0ed378a",
-            "type": "observed-data",
-            "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
-            "created": "2020-01-03T10:37:11.508Z",
-            "modified": "2020-01-03T10:37:11.508Z",
-            "objects": {
-                "0": {
-                    "type": "file",
-                    "name": "mimikatz.exe",
-                    "parent_directory_ref": "1",
-                    "hashes": {
-                        "SHA-256": "bf1a1daac21d3807924d0d3d13282bc020a6e1d9c634963667ec5e746c409bde"
-                    }
-                },
-                "1": {
-                    "type": "directory",
-                    "path": "C:\\tools\\x64"
-                },
-                "2": {
-                    "type": "domain-name",
-                    "value": "winsrv-target"
-                },
-                "3": {
-                    "type": "user-account",
-                    "user_id": "testadmin"
-                }
-            },
-            "x_com_msazure_sentinel_alert": {
-                "id": "2518255317590087645_da637123660281149084_-953649836:QZwuEMZFw_9KajuFRp9Dkq9ypMgKuspzliv+0DPbS64=:WS44c473f9-e9bf-4c71-b40f-3cfd549c34df",
-                "title": "Suspected credential theft activity",
-                "provider": "ASC",
-                "vendor": "Microsoft"
-            },
-            "x_com_msazure_sentinel": {
-                "tenant_id": "b73e5ba8-34d5-495a-9901-06bdb84cf13e",
-                "subscription_id": "083de1fb-cd2d-4b7c-895a-2b5af1d091e8"
-            },
-            "first_observed": "2019-12-19T15:24:00.9912354Z",
-            "last_observed": "2019-12-19T15:24:00.9912354Z",
             "number_observed": 1
         }
     ]
