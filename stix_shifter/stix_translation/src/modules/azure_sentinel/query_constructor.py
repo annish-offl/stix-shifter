@@ -3,12 +3,9 @@ from stix_shifter.stix_translation.src.patterns.pattern_objects import Observati
     CombinedComparisonExpression, CombinedObservationExpression, ObservationOperators
 from stix_shifter.stix_translation.src.patterns.errors import SearchFeatureNotSupportedError
 from datetime import datetime, timedelta
-import logging
 import re
 
 START_STOP_PATTERN = r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z)"
-
-LOGGER = logging.getLogger(__name__)
 
 
 class QueryStringPatternTranslator:
@@ -151,68 +148,70 @@ class QueryStringPatternTranslator:
         mapped_fields_count = len(mapped_fields_array)
 
         def format_comparision_string(comparison_string, mapped_field, lambda_func):
-            # check for STIX attribute
+            # check for mapped_field that has '.' character -> example [fileStates.name,processes.name]
             if '.' in mapped_field:
-                parent_child_obj_array = mapped_field.split('.')
-                parent_attribute = parent_child_obj_array[0]
-                child_attribute_path = '/'.join(parent_child_obj_array[1:])
+                collection_array = mapped_field.split('.')
+                collection_name = collection_array[0]
+                attribute_nested_level = '/'.join(collection_array[1:])
 
                 if stix_field in ['pid', 'parent_ref.pid', 'account_last_login', 'provider', 'vendor', 'protocols[*]']:
-                    child_attribute = '{fn}/'.format(fn=lambda_func) + child_attribute_path
+                    attribute_expression = '{fn}/'.format(fn=lambda_func) + attribute_nested_level
                 else:
-                    child_attribute = 'tolower({fn}/'.format(fn=lambda_func) + child_attribute_path + ')'
+                    attribute_expression = 'tolower({fn}/'.format(fn=lambda_func) + attribute_nested_level + ')'
                 # ip address in data source is like "sourceAddress": "IP: 92.63.194.101 [2]\r"
                 # to get ip address from data source using contains keyword ODATA query
                 if mapped_field in ['networkConnections.sourceAddress', 'networkConnections.destinationAddress',
                                     'fileStates.path', 'processes.path']:
-                    comparison_string += "{parent_attribute}/any({fn}:contains({child_attribute}, {value}))".format(
-                        parent_attribute=parent_attribute, fn=lambda_func, child_attribute=child_attribute,
+                    comparison_string += "{collection_name}/any({fn}:contains({attribute_expression}, {value}))".format(
+                        collection_name=collection_name, fn=lambda_func, attribute_expression=attribute_expression,
                         value=value)
                 elif mapped_field in ['fileStates.fileHash.hashValue', 'processes.fileHash.hashValue']:
                     hash_string = 'fileHash/hashType'
                     hash_type = stix_field.split('.')[1] if mapped_field == 'fileStates.fileHash.hashValue' else \
                         stix_field.split('.')[2]
-                    comparison_string += "({parent_attribute}/any({fn}:{fn}/{hash_string} {comparator} '{value}')" \
-                        .format(parent_attribute=parent_attribute, fn=lambda_func, hash_string=hash_string,
+                    comparison_string += "({collection_name}/any({fn}:{fn}/{hash_string} {comparator} '{value}')" \
+                        .format(collection_name=collection_name, fn=lambda_func, hash_string=hash_string,
                                 comparator='eq', value=hash_type.lower().replace('-', ''))
                     if comparator == 'contains':
-                        comparison_string += " and {parent_attribute}/any({fn}:{comparator}({child_attribute}, " \
-                                             "{value})))".format(parent_attribute=parent_attribute, fn=lambda_func,
-                                                                 child_attribute=child_attribute,
+                        comparison_string += " and {collection_name}/any({fn}:{comparator}({attribute_expression}, " \
+                                             "{value})))".format(collection_name=collection_name, fn=lambda_func,
+                                                                 attribute_expression=attribute_expression,
                                                                  comparator=comparator, value=value)
                     else:
-                        comparison_string += " and {parent_attribute}/any({fn}:{child_attribute} {comparator} " \
-                                             "{value}))".format(parent_attribute=parent_attribute, fn=lambda_func,
-                                                                child_attribute=child_attribute, comparator=comparator,
+                        comparison_string += " and {collection_name}/any({fn}:{attribute_expression} {comparator} " \
+                                             "{value}))".format(collection_name=collection_name, fn=lambda_func,
+                                                                attribute_expression=attribute_expression,
+                                                                comparator=comparator,
                                                                 value=value)
                 elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
                     if isinstance(values, list) and len(values) > 1:
-                        raise SearchFeatureNotSupportedError("comparision operator '{operator}' is returning "
-                                                             "null results in Sentinel connector for more than "
-                                                             "one '{attribute}' value "
+                        raise SearchFeatureNotSupportedError('"{operator}" operator is not supported for "'
+                                                             '{attribute}" attribute'
                                                              .format(operator=expression.comparator.name.upper(),
-                                                                     attribute=mapped_field.split('.')[1]))
+                                                                     attribute=mapped_field.split('.')[1],
+                                                                     values=values))
                     if comparator == 'contains':
                         comparison_string += "{comparator}({object}, {value})".format(
-                            object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
+                            object='/'.join(collection_array), comparator=comparator, value=value)
                     else:
                         comparison_string += "{object} {comparator} {value}".format(
-                            object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
+                            object='/'.join(collection_array), comparator=comparator, value=value)
                 else:
                     if comparator == 'contains':
-                        comparison_string += "{parent_attribute}/any({fn}:{comparator}({child_attribute}, {value}))" \
-                            .format(parent_attribute=parent_attribute, fn=lambda_func, child_attribute=child_attribute,
+                        comparison_string += "{collection_name}/any({fn}:{comparator}({attribute_expression}, {value}))"\
+                            .format(collection_name=collection_name, fn=lambda_func,
+                                    attribute_expression=attribute_expression,
                                     comparator=comparator, value=value)
                     else:
-                        comparison_string += "{parent_attribute}/any({fn}:{child_attribute} {comparator} {value})" \
-                            .format(parent_attribute=parent_attribute, fn=lambda_func, child_attribute=child_attribute,
+                        comparison_string += "{collection_name}/any({fn}:{attribute_expression} {comparator} {value})" \
+                            .format(collection_name=collection_name, fn=lambda_func,
+                                    attribute_expression=attribute_expression,
                                     comparator=comparator, value=value)
             else:
-                # check for LIKE, MATCHES operator (contains) - custom attribute
+                # check for mapped field that does not have '.' character -> example [azureTenantId,title]
                 if comparator == 'contains':
                     comparison_string += "{comparator}(tolower({mapped_field}), {value})".format(
                         mapped_field=mapped_field, comparator=comparator, value=value)
-                # check to form all other operator related query - custom attribute
                 else:
                     comparison_string += "tolower({mapped_field}) {comparator} {value}".format(
                         mapped_field=mapped_field, comparator=comparator, value=value)
@@ -222,7 +221,7 @@ class QueryStringPatternTranslator:
         for mapped_field in mapped_fields_array:
             lambda_func = 'query' + str(counter)
 
-            # for In operator loop the format comparision string for each values in the list.
+            # for In operator, loop the format comparision string for each values in the list.
             if expression.comparator == ComparisonComparators.In:
                 if isinstance(values, list):
                     values_count = len(values)
@@ -318,16 +317,16 @@ class QueryStringPatternTranslator:
 
             if expression.negated:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
-                    raise SearchFeatureNotSupportedError("'NOT' Operator is unsupported for LIKE and MATCHES")
+                    raise SearchFeatureNotSupportedError("'NOT' Operator is not supported for LIKE and MATCHES")
                 elif stix_object in ['ipv4-addr', 'ipv6-addr'] or stix_field in ['src_ref.value', 'dst_ref.value']:
-                    raise SearchFeatureNotSupportedError("'NOT' Operator is unsupported for IPV4 or IPV6 address")
+                    raise SearchFeatureNotSupportedError("'NOT' Operator is not supported for IPV4 or IPV6 address")
                 comparator = self.negated_comparator_lookup.get(expression.comparator)
 
             # to remove single quotes in specific field value
             if stix_field in ['pid', 'parent_ref.pid', 'account_last_login']:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
-                    raise SearchFeatureNotSupportedError("Comparison operator '{operator}' unsupported for "
-                                                         "'{stix_field}' attribute in sentinel connector"
+                    raise SearchFeatureNotSupportedError('"{operator}" operator is not supported for '
+                                                         '"{stix_field}" attribute'
                                                          .format(operator=expression.comparator.name.upper(),
                                                                  stix_field=stix_field))
                 value = self._format_value_without_quotes(value)
