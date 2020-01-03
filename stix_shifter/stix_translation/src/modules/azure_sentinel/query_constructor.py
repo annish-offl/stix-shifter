@@ -186,7 +186,7 @@ class QueryStringPatternTranslator:
                                                                 child_attribute=child_attribute, comparator=comparator,
                                                                 value=value)
                 elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                    if len(values) > 1:
+                    if isinstance(values, list) and len(values) > 1:
                         raise SearchFeatureNotSupportedError("comparision operator '{operator}' is returning "
                                                              "null results in Sentinel connector for more than "
                                                              "one '{attribute}' value "
