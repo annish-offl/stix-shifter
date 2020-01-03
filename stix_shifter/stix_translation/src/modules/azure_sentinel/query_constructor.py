@@ -150,9 +150,9 @@ class QueryStringPatternTranslator:
         def format_comparision_string(comparison_string, mapped_field, lambda_func):
             # check for mapped_field that has '.' character -> example [fileStates.name,processes.name]
             if '.' in mapped_field:
-                collection_array = mapped_field.split('.')
-                collection_name = collection_array[0]
-                attribute_nested_level = '/'.join(collection_array[1:])
+                collection_attribute_array = mapped_field.split('.')
+                collection_name = collection_attribute_array[0]
+                attribute_nested_level = '/'.join(collection_attribute_array[1:])
 
                 if stix_field in ['pid', 'parent_ref.pid', 'account_last_login', 'provider', 'vendor', 'protocols[*]']:
                     attribute_expression = '{fn}/'.format(fn=lambda_func) + attribute_nested_level
@@ -192,10 +192,10 @@ class QueryStringPatternTranslator:
                                                                      values=values))
                     if comparator == 'contains':
                         comparison_string += "{comparator}({object}, {value})".format(
-                            object='/'.join(collection_array), comparator=comparator, value=value)
+                            object='/'.join(collection_attribute_array), comparator=comparator, value=value)
                     else:
                         comparison_string += "{object} {comparator} {value}".format(
-                            object='/'.join(collection_array), comparator=comparator, value=value)
+                            object='/'.join(collection_attribute_array), comparator=comparator, value=value)
                 else:
                     if comparator == 'contains':
                         comparison_string += "{collection_name}/any({fn}:{comparator}({attribute_expression}, {value}))"\
