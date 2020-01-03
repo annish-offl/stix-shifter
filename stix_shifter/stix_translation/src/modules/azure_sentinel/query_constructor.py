@@ -184,7 +184,7 @@ class QueryStringPatternTranslator:
                                                                 comparator=comparator,
                                                                 value=value)
                 elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
-                    if isinstance(values, list) and len(values) > 1:
+                    if isinstance(values, list):
                         raise SearchFeatureNotSupportedError('"{operator}" operator is not supported for "'
                                                              '{attribute}" attribute'
                                                              .format(operator=expression.comparator.name.upper(),
