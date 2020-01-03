@@ -186,6 +186,12 @@ class QueryStringPatternTranslator:
                                                                 child_attribute=child_attribute, comparator=comparator,
                                                                 value=value)
                 elif mapped_field in ['vendorInformation.provider', 'vendorInformation.vendor']:
+                    if len(values) > 1:
+                        raise SearchFeatureNotSupportedError("comparision operator '{operator}' is returning "
+                                                             "null results in Sentinel connector for more than "
+                                                             "one '{attribute}' value "
+                                                             .format(operator=expression.comparator.name.upper(),
+                                                                     attribute=mapped_field.split('.')[1]))
                     if comparator == 'contains':
                         comparison_string += "{comparator}({object}, {value})".format(
                             object='/'.join(parent_child_obj_array), comparator=comparator, value=value)
@@ -312,9 +318,9 @@ class QueryStringPatternTranslator:
 
             if expression.negated:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
-                    raise SearchFeatureNotSupportedError("'NOT' Operator is not supported for LIKE and MATCHES")
+                    raise SearchFeatureNotSupportedError("'NOT' Operator is unsupported for LIKE and MATCHES")
                 elif stix_object in ['ipv4-addr', 'ipv6-addr'] or stix_field in ['src_ref.value', 'dst_ref.value']:
-                    raise SearchFeatureNotSupportedError("'NOT' Operator is not supported for IPV4 or IPV6 address")
+                    raise SearchFeatureNotSupportedError("'NOT' Operator is unsupported for IPV4 or IPV6 address")
                 comparator = self.negated_comparator_lookup.get(expression.comparator)
 
             # to remove single quotes in specific field value
