@@ -1,6 +1,7 @@
 from stix_shifter.stix_translation.src.patterns.pattern_objects import ObservationExpression, ComparisonExpression, \
     ComparisonExpressionOperators, ComparisonComparators, Pattern, \
     CombinedComparisonExpression, CombinedObservationExpression, ObservationOperators
+from stix_shifter.stix_translation.src.patterns.errors import SearchFeatureNotSupportedError
 from datetime import datetime, timedelta
 import logging
 import re
@@ -26,9 +27,6 @@ class QueryStringPatternTranslator:
         ComparisonComparators.Like: "contains",
         ComparisonComparators.In: "eq",
         ComparisonComparators.Matches: 'contains',
-        ObservationOperators.Or: 'or',
-        # Treat AND's as OR's -- Unsure how two ObsExps wouldn't cancel each other out.
-        ObservationOperators.And: 'or'
     }
 
     # comparator lookup for implementing negation operator
@@ -39,9 +37,7 @@ class QueryStringPatternTranslator:
         ComparisonComparators.LessThanOrEqual: "gt",
         ComparisonComparators.Equal: "ne",
         ComparisonComparators.NotEqual: "eq",
-        ComparisonComparators.In: "ne",
-        ComparisonComparators.Matches: "ne",
-        ComparisonComparators.Like: "ne"
+        ComparisonComparators.In: "ne"
     }
 
     def __init__(self, pattern: Pattern, data_model_mapper, time_range):
@@ -49,11 +45,10 @@ class QueryStringPatternTranslator:
         self._time_range = time_range
         self.pattern = pattern
 
-        # List for any queries that are split due to START STOP qualifier
-        self.qualified_queries = []
+        # List of queries for each observation
+        self.final_query_list = []
         # Translated query string without any qualifiers
         self.translated = self.parse_expression(pattern)
-        self.qualified_queries.append(self.translated)
 
     @staticmethod
     def _format_set(value) -> list:
@@ -317,17 +312,18 @@ class QueryStringPatternTranslator:
 
             if expression.negated:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
-                    raise NotImplementedError("NOT Operator is not supported for LIKE and MATCHES")
+                    raise SearchFeatureNotSupportedError("'NOT' Operator is not supported for LIKE and MATCHES")
                 elif stix_object in ['ipv4-addr', 'ipv6-addr'] or stix_field in ['src_ref.value', 'dst_ref.value']:
-                    raise NotImplementedError("NOT Operator is not supported for IPV4 or IPV6 address")
+                    raise SearchFeatureNotSupportedError("'NOT' Operator is not supported for IPV4 or IPV6 address")
                 comparator = self.negated_comparator_lookup.get(expression.comparator)
 
             # to remove single quotes in specific field value
             if stix_field in ['pid', 'parent_ref.pid', 'account_last_login']:
                 if expression.comparator in [ComparisonComparators.Like, ComparisonComparators.Matches]:
-                    raise NotImplementedError("Comparison operator '{operator}' unsupported for '{stix_field}' "
-                                              "attribute in Senitnel connector".format(
-                                               operator=expression.comparator.name.upper(), stix_field=stix_field))
+                    raise SearchFeatureNotSupportedError("Comparison operator '{operator}' unsupported for "
+                                                         "'{stix_field}' attribute in sentinel connector"
+                                                         .format(operator=expression.comparator.name.upper(),
+                                                                 stix_field=stix_field))
                 value = self._format_value_without_quotes(value)
 
             if stix_field not in ['provider', 'vendor']:
@@ -359,38 +355,21 @@ class QueryStringPatternTranslator:
         elif isinstance(expression, ObservationExpression):
             parse_string = self._parse_expression(expression.comparison_expression)
             time_string = self._parse_time_range(qualifier, self._time_range)
-            return "({}) and ({})".format(parse_string, time_string)
+            sentinel_query = "({}) and ({})".format(parse_string, time_string)
+            self.final_query_list.append(sentinel_query)
         elif hasattr(expression, 'qualifier') and hasattr(expression, 'observation_expression'):
             if isinstance(expression.observation_expression, CombinedObservationExpression):
-                operator = self._lookup_comparison_operator(expression.observation_expression.operator)
-                expression_01 = self._parse_expression(expression.observation_expression.expr1, expression.qualifier)
-                # qualifier only needs to be passed into the parse expr once since it will be the same for both expr's
-                expression_02 = self._parse_expression(expression.observation_expression.expr2, expression.qualifier)
-                if expression_01 and expression_02:
-                    return "({}) {} ({})".format(expression_01, operator, expression_02)
-                elif expression_01:
-                    return "{}".format(expression_01)
-                elif expression_02:
-                    return "{}".format(expression_02)
-                else:
-                    return ''
+                self._parse_expression(expression.observation_expression.expr1, expression.qualifier)
+                self._parse_expression(expression.observation_expression.expr2, expression.qualifier)
             else:
                 parse_string = self._parse_expression(expression.observation_expression.comparison_expression,
                                                       expression.qualifier)
                 time_string = self._parse_time_range(expression.qualifier, self._time_range)
-                return "({}) and ({})".format(parse_string, time_string)
+                sentinel_query = "({}) and ({})".format(parse_string, time_string)
+                self.final_query_list.append(sentinel_query)
         elif isinstance(expression, CombinedObservationExpression):
-            operator = self._lookup_comparison_operator(expression.operator)
-            expression_01 = self._parse_expression(expression.expr1, qualifier)
-            expression_02 = self._parse_expression(expression.expr2, qualifier)
-            if expression_01 and expression_02:
-                return "({}) {} ({})".format(expression_01, operator, expression_02)
-            elif expression_01:
-                return "{}".format(expression_01)
-            elif expression_02:
-                return "{}".format(expression_02)
-            else:
-                return ''
+            self._parse_expression(expression.expr1, qualifier)
+            self._parse_expression(expression.expr2, qualifier)
         elif isinstance(expression, Pattern):
             return "{expr}".format(expr=self._parse_expression(expression.expression))
         else:
@@ -418,5 +397,5 @@ def translate_pattern(pattern: Pattern, data_model_mapping, options):
     timerange = options['timerange']
     query = QueryStringPatternTranslator(pattern, data_model_mapping, timerange)
 
-    translated_query = query.qualified_queries
+    translated_query = query.final_query_list
     return translated_query
