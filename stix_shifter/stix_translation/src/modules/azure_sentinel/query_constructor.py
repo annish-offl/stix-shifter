@@ -1,6 +1,6 @@
 from stix_shifter.stix_translation.src.patterns.pattern_objects import ObservationExpression, ComparisonExpression, \
     ComparisonExpressionOperators, ComparisonComparators, Pattern, \
-    CombinedComparisonExpression, CombinedObservationExpression, ObservationOperators
+    CombinedComparisonExpression, CombinedObservationExpression
 from stix_shifter.stix_translation.src.patterns.errors import SearchFeatureNotSupportedError
 from datetime import datetime, timedelta
 import re
@@ -188,8 +188,7 @@ class QueryStringPatternTranslator:
                         raise SearchFeatureNotSupportedError('"{operator}" operator is not supported for "'
                                                              '{attribute}" attribute'
                                                              .format(operator=expression.comparator.name.upper(),
-                                                                     attribute=mapped_field.split('.')[1],
-                                                                     values=values))
+                                                                     attribute=mapped_field.split('.')[1]))
                     if comparator == 'contains':
                         comparison_string += "{comparator}({object}, {value})".format(
                             object='/'.join(collection_attribute_array), comparator=comparator, value=value)
@@ -198,7 +197,8 @@ class QueryStringPatternTranslator:
                             object='/'.join(collection_attribute_array), comparator=comparator, value=value)
                 else:
                     if comparator == 'contains':
-                        comparison_string += "{collection_name}/any({fn}:{comparator}({attribute_expression}, {value}))"\
+                        comparison_string += "{collection_name}/any({fn}:{comparator}({attribute_expression}, " \
+                                             "{value}))"\
                             .format(collection_name=collection_name, fn=lambda_func,
                                     attribute_expression=attribute_expression,
                                     comparator=comparator, value=value)
